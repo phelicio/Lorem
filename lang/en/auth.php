@@ -17,5 +17,6 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'registered' => 'User has been registered sucessfully.',
+    'success' => 'auth.success_holder',
 
 ];

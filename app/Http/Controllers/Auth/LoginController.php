@@ -13,7 +13,7 @@ class LoginController extends Controller
         $data = $request->all();
         $user = $service->login($data);
         return response()->json([
-            'message' => __('auth.failed'),
+            'message' => __('auth.success'),
             'user' => $user,
         ]);
     }
