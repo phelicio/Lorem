@@ -18,12 +18,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('comments')->group(function () {
+/*
+|--------------------------------------------------------------------------
+| Auth Routes
+|--------------------------------------------------------------------------
+*/
+Route::group([
+    'namespace' => '\App\Http\Controllers\Auth',
+    'prefix' => 'auth',
+], function () {
+    Route::post('/register', RegisterController::class)->name('register');
+    Route::post('/login', LoginController::class)->name('login');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Podcast Routes
+|--------------------------------------------------------------------------
+*/
 Route::group([
     'namespace' => '\App\Http\Controllers\Podcast',
     'prefix' => 'podcasts',
+    'middleware' => 'auth:sanctum',
 ], function () {
     Route::get('/', ListPodcastController::class);
     Route::post('/', CreatePodcastController::class);
