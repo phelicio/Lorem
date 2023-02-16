@@ -6,6 +6,7 @@ use App\Exceptions\Auth\InvalidLoginException;
 use App\Models\Auth\User;
 use App\Services\Auth\Interfaces\AuthServiceInterface;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthService implements AuthServiceInterface
 {
@@ -17,7 +18,7 @@ class AuthService implements AuthServiceInterface
     public function login(array $data): User
     {
         if(! Auth::attempt($data)) {
-           throw new InvalidLoginException();
+            abort(Response::HTTP_UNAUTHORIZED);
         }
 
         $user = $this->model->where('email', $data['email'])->first();
